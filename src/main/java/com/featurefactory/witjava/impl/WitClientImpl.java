@@ -52,14 +52,11 @@ public class WitClientImpl implements WitClient {
         ConverseResponse response = sendRequest(new ConverseRequest(message, sessionId, currentContext), ConverseResponse.class);
 
         if(response.isMessage()) {
-            System.out.println("got message");
             messageHandler.sendMessage(response.getMessage(), chatMetadata);
         } else if(response.isAction() && actionHandlerMap.containsKey(response.getAction())){
-            System.out.println("got action");
             currentContext = actionHandlerMap.get(response.getAction()).run(response.getEntityMap(), currentContext);
             converse("", sessionId, currentContext, chatMetadata);
         } else if(!response.isStop()){
-            System.out.println("got STOP");
             return false;
         }
         return true;

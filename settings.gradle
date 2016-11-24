@@ -1,2 +1,3 @@
 rootProject.name = 'wit-java'
+include 'wit-java-example'
 
