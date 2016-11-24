@@ -1,6 +1,7 @@
 package com.featurefactory.witjava;
 
 import com.featurefactory.witjava.impl.WitClientImpl;
+import com.featurefactory.witjava.model.ChatContext;
 
 import java.util.HashMap;
 import java.util.Map;
