@@ -1,3 +1,4 @@
-rootProject.name = 'wit-java'
-include 'wit-java-example'
+rootProject.name = 'wit-java-root'
+include 'com.featurefactory.wit-java'
+include 'com.featurefactory.wit-java-example'
 

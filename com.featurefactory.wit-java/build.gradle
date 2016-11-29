@@ -1,0 +1,10 @@
+group 'com.featurefactory'
+version '1.0.0-beta'
+
+dependencies {
+    compile 'com.mashape.unirest:unirest-java:1.4.9'
+    compile 'com.fasterxml.jackson.core:jackson-core:2.8.5'
+    compile 'com.fasterxml.jackson.core:jackson-annotations:2.8.5'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.8.5'
+    testCompile 'junit:junit:4.12'
+}
