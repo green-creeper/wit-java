@@ -41,6 +41,25 @@ public class ChatContext {
         values.put(key, value);
     }
 
+
+    /**
+     * Check if context contains a value by given key
+     * @param key key
+     * @return
+     */
+    public boolean containsKey(String key){
+        return values.containsKey(key);
+    }
+
+    /**
+     * Get value from context
+     * @param key key to get
+     * @return value
+     */
+    public String getValue(String key) {
+        return values.get(key);
+    }
+
     /**
      * Get and remove value
      * @param key
