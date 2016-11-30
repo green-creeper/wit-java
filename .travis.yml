@@ -3,4 +3,4 @@ jdk:
   - oraclejdk8
 deploy:
   provider: script
-  script gradlew :com.featurefactory.wit-java:publish
+  script: gradlew :com.featurefactory.wit-java:publish
