@@ -1,5 +1,5 @@
 group 'com.featurefactory'
-version '1.0.1-beta'
+version '1.0.0-beta'
 apply plugin: 'maven-publish'
 
 
@@ -11,6 +11,10 @@ dependencies {
     testCompile 'junit:junit:4.12'
 }
 
+task packageJavadoc(type: Jar, dependsOn: 'javadoc') {
+    from javadoc.destinationDir
+    classifier = 'javadoc'
+}
 
 publishing {
     repositories {
@@ -21,6 +25,10 @@ publishing {
 
     publications {
         maven(MavenPublication) {
+            groupId group
+            artifactId 'wit-java'
+            version version
+
             from components.java
         }
     }
