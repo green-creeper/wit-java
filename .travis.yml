@@ -4,3 +4,5 @@ jdk:
 deploy:
   provider: script
   script: './gradlew :com.featurefactory.wit-java:publish'
+  on:
+      branch: master
