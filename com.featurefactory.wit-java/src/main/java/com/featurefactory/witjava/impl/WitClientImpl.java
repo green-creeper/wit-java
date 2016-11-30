@@ -11,11 +11,15 @@ import com.featurefactory.witjava.model.ResponseMapper;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import com.mashape.unirest.request.HttpRequestWithBody;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Marker;
 
 import java.util.Map;
 
 public class WitClientImpl implements WitClient {
 
+    final Logger logger = LoggerFactory.getLogger(WitClientImpl.class);
     private final String token;
     private final Map<String, ActionHandler> actionHandlerMap;
     private final MessageHandler messageHandler;
@@ -35,6 +39,7 @@ public class WitClientImpl implements WitClient {
                     .queryString(request.getParamMap()).body(request.getContext().toString())
                     .asObject(valueType).getBody();
         } catch (UnirestException e) {
+            logger.error("Error communicating with wit.ai API", e);
             throw new RuntimeException(e);
         }
     }
@@ -48,17 +53,21 @@ public class WitClientImpl implements WitClient {
     }
 
     public boolean converse(String message, String sessionId, ChatContext context, Map<String, Object> chatMetadata) {
+        logger.debug("start converse, message: {}, session: {}, context {}", message, sessionId, context);
         ChatContext currentContext = context;
         ConverseResponse response = sendRequest(new ConverseRequest(message, sessionId, currentContext), ConverseResponse.class);
-
+        logger.debug("converse response: {}", response);
         if(response.isMessage()) {
+            logger.debug("sending message \"{}\" ", response.getMessage());
             messageHandler.sendMessage(response.getMessage(), chatMetadata);
         } else if(response.isAction() && actionHandlerMap.containsKey(response.getAction())){
+            logger.debug("starting action '{}'", response.getAction());
             currentContext = actionHandlerMap.get(response.getAction()).run(response.getEntityMap(), currentContext);
             converse("", sessionId, currentContext, chatMetadata);
         } else if(!response.isStop()){
             return false;
         }
+        logger.debug("received 'stop' command");
         return true;
     }
 
