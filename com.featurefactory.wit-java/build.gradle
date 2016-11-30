@@ -1,5 +1,7 @@
 group 'com.featurefactory'
-version '1.0.0-beta'
+version '1.0.1-beta'
+apply plugin: 'maven-publish'
+
 
 dependencies {
     compile 'com.mashape.unirest:unirest-java:1.4.9'
@@ -7,4 +9,19 @@ dependencies {
     compile 'com.fasterxml.jackson.core:jackson-annotations:2.8.5'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.8.5'
     testCompile 'junit:junit:4.12'
+}
+
+
+publishing {
+    repositories {
+        maven {
+            url 'https://mymavenrepo.com/repo/TT5FA1yWZbZ7NeWsuknp/'
+        }
+    }
+
+    publications {
+        maven(MavenPublication) {
+            from components.java
+        }
+    }
 }
