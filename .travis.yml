@@ -2,4 +2,5 @@ language: java
 jdk:
   - oraclejdk8
 deploy:
-  :com.featurefactory.wit-java:publish
+  provider: script
+  script gradlew :com.featurefactory.wit-java:publish
