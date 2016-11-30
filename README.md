@@ -1,6 +1,8 @@
 # wit-java
 Java client library for Wit.ai
 
+[![Build Status](https://travis-ci.org/green-creeper/wit-java.svg?branch=master)](https://travis-ci.org/green-creeper/wit-java)
+
 ### The library is under development so you are welcome to do pull requests
 
 
