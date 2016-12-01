@@ -1,6 +1,9 @@
 package com.featurefactory.witjava.model;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -71,11 +74,11 @@ public class ChatContext {
 
     @Override
     public String toString() {
-        String val = "{";
-        for(String key: values.keySet()){
-            val+="\""+key+"\":\""+values.get(key)+"\"";
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            return mapper.writeValueAsString(values);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
         }
-        val += "}";
-        return val;
     }
 }
