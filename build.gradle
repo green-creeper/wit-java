@@ -1,14 +1,11 @@
-apply plugin: "idea"
-apply plugin: "eclipse"
+allprojects {
+    apply plugin: "idea"
+    apply plugin: "eclipse"
+
+}
 
 subprojects {
     apply plugin: "java"
-
-    idea {
-        project {
-            languageLevel = '1.8'
-        }
-    }
 
     sourceSets {
         main {
