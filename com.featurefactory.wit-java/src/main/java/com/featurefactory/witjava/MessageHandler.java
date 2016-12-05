@@ -12,6 +12,7 @@ public interface MessageHandler {
      * Sends message
      * @param message text of message to send
      * @param chatMetadata additional data from client side which could be used in process of sending messages
+     * @param quickreplies list of quick replies if set up in story
      */
-    void sendMessage(String message, Map<String, Object> chatMetadata);
+    void sendMessage(String message, Map<String, Object> chatMetadata, String[] quickreplies);
 }
