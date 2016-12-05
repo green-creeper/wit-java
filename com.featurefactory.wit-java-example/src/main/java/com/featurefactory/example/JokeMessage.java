@@ -15,7 +15,7 @@ public class JokeMessage implements MessageHandler{
     }
 
     @Override
-    public void sendMessage(String message, Map<String, Object> chatMetadata) {
+    public void sendMessage(String message, Map<String, Object> chatMetadata, String[] quickreplies) {
         SendMessage req = new SendMessage();
         req.setChatId(chatMetadata.get("chat_id").toString());
         req.setText(message);
