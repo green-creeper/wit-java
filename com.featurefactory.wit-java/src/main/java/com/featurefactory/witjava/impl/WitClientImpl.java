@@ -59,7 +59,7 @@ public class WitClientImpl implements WitClient {
         logger.debug("converse response: {}", response);
         if(response.isMessage()) {
             logger.debug("sending message \"{}\" ", response.getMessage());
-            messageHandler.sendMessage(response.getMessage(), chatMetadata);
+            messageHandler.sendMessage(response.getMessage(), chatMetadata, response.getQuickreplies());
         } else if(response.isAction() && actionHandlerMap.containsKey(response.getAction())){
             logger.debug("starting action '{}'", response.getAction());
             currentContext = actionHandlerMap.get(response.getAction()).run(response.getEntityMap(), currentContext);
