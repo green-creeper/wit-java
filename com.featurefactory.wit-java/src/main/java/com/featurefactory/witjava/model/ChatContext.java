@@ -40,7 +40,7 @@ public class ChatContext {
      * @param key key
      * @param value string value
      */
-    public void setValue(String key, String value){
+    public void setValue(String key, Object value){
         values.put(key, value);
     }
 
