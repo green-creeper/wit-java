@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ChatContext {
-    private Map<String, String> values = new HashMap<>();
+    private Map<String, Object> values = new HashMap<>();
 
     /***
      * timezone is used only if you don’t provide a reference_time. In this case, we will calculate reference_time from timezone and the UTC time of the API server.
@@ -59,7 +59,7 @@ public class ChatContext {
      * @param key key to get
      * @return value
      */
-    public String getValue(String key) {
+    public Object getValue(String key) {
         return values.get(key);
     }
 
@@ -68,7 +68,7 @@ public class ChatContext {
      * @param key
      * @return
      */
-    public String popValue(String key){
+    public Object popValue(String key){
         return values.remove(key);
     }
 
