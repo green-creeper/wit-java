@@ -17,6 +17,11 @@ task packageJavadoc(type: Jar, dependsOn: 'javadoc') {
     classifier = 'javadoc'
 }
 
+task sourceJar(type: Jar) {
+    from sourceSets.main.allJava
+    classifier "sources"
+}
+
 publishing {
     repositories {
         maven {
@@ -31,6 +36,8 @@ publishing {
             version version
 
             from components.java
+            artifact sourceJar
+            artifact packageJavadoc
         }
     }
 }
