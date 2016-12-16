@@ -4,10 +4,7 @@ import com.featurefactory.witjava.ActionHandler;
 import com.featurefactory.witjava.MessageHandler;
 import com.featurefactory.witjava.WitClient;
 import com.featurefactory.witjava.WitRequest;
-import com.featurefactory.witjava.model.ChatContext;
-import com.featurefactory.witjava.model.ConverseResponse;
-import com.featurefactory.witjava.model.MessageResponse;
-import com.featurefactory.witjava.model.ResponseMapper;
+import com.featurefactory.witjava.model.*;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import com.mashape.unirest.request.HttpRequestWithBody;
@@ -52,7 +49,7 @@ public class WitClientImpl implements WitClient {
         return getConverse(message, sessionId, null);
     }
 
-    public boolean converse(String message, String sessionId, ChatContext context, Map<String, Object> chatMetadata) {
+    public ConverseResult converse(String message, String sessionId, ChatContext context, Map<String, Object> chatMetadata) {
         logger.debug("start converse, message: {}, session: {}, context {}", message, sessionId, context);
         ChatContext currentContext = context;
         ConverseResponse response = sendRequest(new ConverseRequest(message, sessionId, currentContext), ConverseResponse.class);
@@ -64,15 +61,12 @@ public class WitClientImpl implements WitClient {
             logger.debug("starting action '{}'", response.getAction());
             currentContext = actionHandlerMap.get(response.getAction()).run(response.getEntityMap(), currentContext);
             converse("", sessionId, currentContext, chatMetadata);
-        } else if(!response.isStop()){
-            return false;
         }
-        logger.debug("received 'stop' command");
-        return true;
+        return new ConverseResult(currentContext.isFinished());
     }
 
     @Override
-    public boolean converse(String message, String sessionId, ChatContext context) {
+    public ConverseResult converse(String message, String sessionId, ChatContext context) {
         return converse(message, sessionId, context, null);
     }
 

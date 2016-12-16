@@ -58,11 +58,11 @@ public class SampleBot extends TelegramLongPollingBot{
 
     @Override
     public String getBotUsername() {
-        return "YOUR_BOT_NAME";
+        return "InMyFridgeTestBot";
     }
 
     @Override
     public String getBotToken() {
-        return "YOUR_BOT_TOKEN";
+        return "207097903:AAEj0upM-uFm_FqHJCPnQHvP3S8LRcVsOvA";
     }
 }

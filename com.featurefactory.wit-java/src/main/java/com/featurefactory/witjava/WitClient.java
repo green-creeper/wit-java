@@ -3,6 +3,7 @@ package com.featurefactory.witjava;
 
 import com.featurefactory.witjava.model.ChatContext;
 import com.featurefactory.witjava.model.ConverseResponse;
+import com.featurefactory.witjava.model.ConverseResult;
 import com.featurefactory.witjava.model.MessageResponse;
 
 import java.util.Map;
@@ -45,7 +46,7 @@ public interface WitClient {
     ConverseResponse getConverse(String message, String sessionId, ChatContext context);
 
 
-    boolean converse(String message, String sessionId, ChatContext context);
+    ConverseResult converse(String message, String sessionId, ChatContext context);
 
     /**
      * Execute converse and performs next step, invoking {@link MessageHandler} or {@link ActionHandler}
@@ -56,5 +57,5 @@ public interface WitClient {
      * @param chatMetadata Object for MessageHandler to pass parameters
      * @return returns true if current chat is continues (e.g. waiting for user input) or ends and the session should expire
      */
-    boolean converse(String message, String sessionId, ChatContext context, Map<String, Object> chatMetadata);
+    ConverseResult converse(String message, String sessionId, ChatContext context, Map<String, Object> chatMetadata);
 }

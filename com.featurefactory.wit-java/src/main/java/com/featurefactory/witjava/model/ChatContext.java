@@ -10,6 +10,8 @@ import java.util.Map;
 public class ChatContext {
     private Map<String, Object> values = new HashMap<>();
 
+    private boolean isFinished = false;
+
     /***
      * timezone is used only if you don’t provide a reference_time. In this case, we will calculate reference_time from timezone and the UTC time of the API server.
      * @param timezone ID of timezone <a href="http://docs.oracle.com/javase/6/docs/api/java/util/TimeZone.html#getAvailableIDs()">TimeZone</a>
@@ -80,5 +82,21 @@ public class ChatContext {
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    /**
+     * Gets conversation ended flag
+     * @return
+     */
+    public boolean isFinished() {
+        return isFinished;
+    }
+
+    /**
+     * Set sonversation end flag. Should be set to let bot delete stored session
+     * @param finished
+     */
+    public void setFinished(boolean finished) {
+        isFinished = finished;
     }
 }
