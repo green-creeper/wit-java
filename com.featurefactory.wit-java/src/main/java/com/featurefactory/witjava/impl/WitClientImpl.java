@@ -62,7 +62,7 @@ public class WitClientImpl implements WitClient {
             currentContext = actionHandlerMap.get(response.getAction()).run(response.getEntityMap(), currentContext);
             converse("", sessionId, currentContext, chatMetadata);
         }
-        return new ConverseResult(currentContext.isFinished());
+        return new ConverseResult(currentContext.isFinished(), currentContext);
     }
 
     @Override
